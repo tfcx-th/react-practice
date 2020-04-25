@@ -109,3 +109,15 @@ export const WriterItem = styled.div`
         }
     }
 `
+
+export const BackTop = styled.div`
+    position: fixed;
+    right: 100px;
+    bottom: 100px;
+    width: 60px;
+    height: 60px;
+    text-align: 60px;
+    font-size: 14px;
+    line-height: 60px;
+    border: 1px solid #ccc;
+`

@@ -15,6 +15,7 @@ import {
     Addition,
     Button
 } from './style'
+import { Link } from 'react-router-dom'
 
 class Header extends React.Component {
     getListArea() {
@@ -39,7 +40,7 @@ class Header extends React.Component {
     render() {
         return (
             <HeaderWrapper>
-                <Logo href='/' />
+                <Link to='/'><Logo href='/' /></Link>
                 <Nav>
                     <NavItem className="left active">首页</NavItem>
                     <NavItem className="left">下载App</NavItem>

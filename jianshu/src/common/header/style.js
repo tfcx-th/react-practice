@@ -8,7 +8,7 @@ export const HeaderWrapper = styled.div`
     border-bottom: 1px solid #f0f0f0;
     user-select: none;
 `
-export const Logo = styled.a`
+export const Logo = styled.div`
     position: absolute;
     display: block;
     top: 0;

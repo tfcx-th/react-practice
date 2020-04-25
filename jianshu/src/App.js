@@ -12,8 +12,8 @@ class App extends React.Component {
         return (
             <Provider store={store}>
                 <GlobalStyle />
-                <Header />
                 <BrowserRouter>
+                    <Header />
                     <Route path='/' exact component={Home} />
                     <Route path='/detail' exact component={Detail} />
                 </BrowserRouter>

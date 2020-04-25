@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable'
+import * as constant from './constant'
 import recommend1 from '../../../statics/recommend-1.png'
 import recommend2 from '../../../statics/recommend-2.png'
 import recommend3 from '../../../statics/recommend-3.png'
@@ -6,54 +7,8 @@ import recommend4 from '../../../statics/recommend-4.png'
 import userUrl from '../../../statics/user.png'
 
 const defaultState = fromJS({
-    topicList: [{
-        id: 1,
-        title: '社会热点'
-    }, {
-        id: 2,
-        title: '手绘'
-    }, {
-        id: 3,
-        title: '读书'
-    }, {
-        id: 4,
-        title: '摄影'
-    }, {
-        id: 5,
-        title: '历史'
-    }, {
-        id: 6,
-        title: '旅行，在路上'
-    }],
-    articleList: [{
-        id: 1,
-        title: '逍遥游',
-        content: '北冥有鱼，其名为鲲。鲲之大，不知其几千里也。化而为鸟，其名为鹏。鹏之背，不知其几千里也，怒而飞，其翼若垂天之云。是鸟也，海运则将徙于南冥。南冥者，天池也。《齐谐》者，志怪者也。《谐》之言曰：“鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里，去以六月息者也。”。。。'
-    }, {
-        id: 2,
-        title: '逍遥游',
-        content: '北冥有鱼，其名为鲲。鲲之大，不知其几千里也。化而为鸟，其名为鹏。鹏之背，不知其几千里也，怒而飞，其翼若垂天之云。是鸟也，海运则将徙于南冥。南冥者，天池也。《齐谐》者，志怪者也。《谐》之言曰：“鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里，去以六月息者也。”。。。'
-    }, {
-        id: 3,
-        title: '逍遥游',
-        content: '北冥有鱼，其名为鲲。鲲之大，不知其几千里也。化而为鸟，其名为鹏。鹏之背，不知其几千里也，怒而飞，其翼若垂天之云。是鸟也，海运则将徙于南冥。南冥者，天池也。《齐谐》者，志怪者也。《谐》之言曰：“鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里，去以六月息者也。”。。。'
-    }, {
-        id: 4,
-        title: '逍遥游',
-        content: '北冥有鱼，其名为鲲。鲲之大，不知其几千里也。化而为鸟，其名为鹏。鹏之背，不知其几千里也，怒而飞，其翼若垂天之云。是鸟也，海运则将徙于南冥。南冥者，天池也。《齐谐》者，志怪者也。《谐》之言曰：“鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里，去以六月息者也。”。。。'
-    }, {
-        id: 5,
-        title: '逍遥游',
-        content: '北冥有鱼，其名为鲲。鲲之大，不知其几千里也。化而为鸟，其名为鹏。鹏之背，不知其几千里也，怒而飞，其翼若垂天之云。是鸟也，海运则将徙于南冥。南冥者，天池也。《齐谐》者，志怪者也。《谐》之言曰：“鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里，去以六月息者也。”。。。'
-    }, {
-        id: 6,
-        title: '逍遥游',
-        content: '北冥有鱼，其名为鲲。鲲之大，不知其几千里也。化而为鸟，其名为鹏。鹏之背，不知其几千里也，怒而飞，其翼若垂天之云。是鸟也，海运则将徙于南冥。南冥者，天池也。《齐谐》者，志怪者也。《谐》之言曰：“鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里，去以六月息者也。”。。。'
-    }, {
-        id: 7,
-        title: '逍遥游',
-        content: '北冥有鱼，其名为鲲。鲲之大，不知其几千里也。化而为鸟，其名为鹏。鹏之背，不知其几千里也，怒而飞，其翼若垂天之云。是鸟也，海运则将徙于南冥。南冥者，天池也。《齐谐》者，志怪者也。《谐》之言曰：“鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里，去以六月息者也。”。。。'
-    }],
+    topicList: [],
+    articleList: [],
     recommendList: [{
         id: 1,
         url: recommend1
@@ -97,9 +52,20 @@ const defaultState = fromJS({
         total: 123.4,
         liked: 56,
         url: userUrl
-    }]
+    }],
+    showScroll: false
 })
 
 export default (state = defaultState, action) => {
-    return state
+    switch (action.type) {
+        case constant.CHANGE_HOME_DATA:
+            return state.merge({
+                topicList: fromJS(action.topicList),
+                articleList: fromJS(action.articleList)
+            })
+        case constant.TOGGLE_SCROLL_TOP:
+            return state.set('showScroll', action.show)
+        default:
+            return state
+    }
 }
