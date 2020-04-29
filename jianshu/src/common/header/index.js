@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { CSSTransition } from 'react-transition-group'
 import { actionCreators } from './store'
+import { actionCreators as loginActionCreators } from '../../pages/login/store'
 import {
     HeaderWrapper,
     Logo,
@@ -38,13 +39,17 @@ class Header extends React.Component {
     }
 
     render() {
+        const { focused, login, logout } = this.props
         return (
             <HeaderWrapper>
                 <Link to='/'><Logo href='/' /></Link>
                 <Nav>
                     <NavItem className="left active">首页</NavItem>
                     <NavItem className="left">下载App</NavItem>
-                    <NavItem className="right">登录</NavItem>
+                    {
+                        login ? <NavItem className="right" onClick={ logout }>退出</NavItem>
+                            : <Link to="/login"><NavItem className="right">登录</NavItem></Link>
+                    }
                     <NavItem className="right">Aa</NavItem>
                     <SearchWrapper>
                         <CSSTransition
@@ -53,13 +58,13 @@ class Header extends React.Component {
                             classNames="slide"
                         >
                             <NavSearch
-                                className={ this.props.focused ? 'focused' : '' }
+                                className={ focused ? 'focused' : '' }
                                 onFocus={ this.props.handleInputFocus }
                                 onBlur={ this.props.handleInputBlur }
                             />
                         </CSSTransition>
                         <div className="search-icon" />
-                        { this.getListArea( this.props.focused) }
+                        { this.getListArea(focused) }
                     </SearchWrapper>
                 </Nav>
                 <Addition>
@@ -74,7 +79,8 @@ class Header extends React.Component {
 const mapStateToProps = state => {
     return {
         focused: state.get('header').get('focused'),
-        list: state.get('header').get('list')
+        list: state.get('header').get('list'),
+        login: state.get('login').get('login')
     }
 }
 
@@ -86,6 +92,9 @@ const mapDispatchToProps = dispatch => {
         },
         handleInputBlur() {
             dispatch(actionCreators.searchBlur())
+        },
+        logout() {
+            dispatch(loginActionCreators.logout())
         }
     }
 }

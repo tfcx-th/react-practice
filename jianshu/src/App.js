@@ -5,7 +5,8 @@ import { GlobalStyle } from './style'
 import store from './store'
 import Header from './common/header'
 import Home from './pages/home'
-import Detail from './pages/detail'
+import Detail from './pages/detail/loadable'
+import Login from './pages/login'
 
 class App extends React.Component {
     render() {
@@ -15,6 +16,7 @@ class App extends React.Component {
                 <BrowserRouter>
                     <Header />
                     <Route path='/' exact component={Home} />
+                    <Route path='/login' exact component={Login} />
                     <Route path='/detail' exact component={Detail} />
                 </BrowserRouter>
             </Provider>
